@@ -1,4 +1,5 @@
 using Application;
+using Application.Common.Interface;
 using Infrastructure;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -13,6 +14,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 var app = builder.Build();
 

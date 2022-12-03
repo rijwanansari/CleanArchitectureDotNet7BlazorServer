@@ -1,4 +1,6 @@
-﻿using Application.Common.Interface;
+﻿using Application.Common.Error;
+using Application.Common.Interface;
+using Infrastructure.LogCapture;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +18,7 @@ namespace Infrastructure
             services.AddScoped<IApplicationDBContext>(provider => provider.GetService<ApplicationDBContext>());
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddSingleton<IErrorMessageLog, ErrorMessageLog>();
+            services.AddSingleton<IErrorMessageLog, ErrorMessageLog>();
             //services.AddScoped<IConfigurationExtension, ConfigurationExtensions>();
             //services.AddScoped<IBlobStorageService, BlobStorageService>();
 

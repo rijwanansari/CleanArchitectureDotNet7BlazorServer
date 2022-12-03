@@ -2,7 +2,7 @@
 
 namespace Domain.Master
 {
-    public class AppSetting : BaseEntity<int>
+    public class AppSetting : AuditableWithBaseEntity<int>
     {
         /// <summary>
         /// Gets or sets the ReferenceKey

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Master;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application
@@ -7,7 +8,7 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-           //services.AddScoped<IMasterServices, MasterServices>();
+            services.AddScoped<IAppSettingService, AppSettingService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
