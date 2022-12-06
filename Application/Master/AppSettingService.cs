@@ -73,6 +73,7 @@ namespace Application.Master
             }
         }
         #endregion
+
         #region Queries
         public async Task<ResponseModel> GetAppSettingsAsync()
         {
