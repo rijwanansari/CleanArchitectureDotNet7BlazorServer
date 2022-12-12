@@ -1,1 +1,1 @@
-# CleanArchitectureDotNet7
+# CleanArchitectureDotNet7BlazorServer
