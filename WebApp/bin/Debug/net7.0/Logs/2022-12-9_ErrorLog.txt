@@ -1,0 +1,13 @@
+Layer Name :-Application
+Class Name :-AppSettingService
+Method Name :-GetAppSettingsAsync
+Date Time :-12/9/2022 5:40:02 PM
+Error Message :-A second operation was started on this context instance before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+
+
+
+Layer Name :-Application
+Class Name :-AppSettingService
+Method Name :-GetAppSettingsAsync
+Date Time :-12/9/2022 5:40:04 PM
+Error Message :-Invalid object name 'AppSettings'.

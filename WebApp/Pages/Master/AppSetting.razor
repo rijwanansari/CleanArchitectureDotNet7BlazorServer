@@ -1,5 +1,169 @@
-﻿<h3>AppSetting</h3>
+﻿@page "/appsetting"
+@using Application.Master.Dto;
+@using Application.Master;
+@inject IAppSettingService appSettingService
+
+<h4>Application Setting</h4>
+@if (warninngMessage.Length > 0)
+{
+    <div class="alert alert-warning">
+        <strong>Warning!</strong> @warninngMessage.
+    </div>
+}
+<EditForm Model="@appSettingVm" OnValidSubmit="OnSaveSubmitClick" class="row p-3">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="ReferenceNo">Reference Key</label>
+            <InputText id="ReferenceNo" @bind-Value="appSettingVm.ReferenceKey" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="ReferenceNo">Value</label>
+            <InputText id="ReferenceNo" @bind-Value="appSettingVm.Value" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="ReferenceNo">Description</label>
+            <InputText id="ReferenceNo" @bind-Value="appSettingVm.Description" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="ReferenceNo">Reference Type</label>
+            <select id="Currency" class="form-control" @bind="appSettingVm.Type">
+                <option value="">--Select--</option>
+                @foreach (var type in appSettingTypes)
+                {
+                    <option value="@type"> @type </option>
+                }
+            </select>
+        </div>
+
+    </div>
+    <div class="col-3 mb-3">
+        @if (appSettingVm.Id > 0)
+        {
+            <button type="submit" class="btn btn-primary">Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Save</button>
+        }
+    </div>
+</EditForm>
+@if (appSettingVmList == null)
+{
+    <p><Icon Type="loading" Theme="outline" /> <em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>Value</th>
+                    <th>Type </th>
+                    <th>Caption</th>
+                    <th style="width:200px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var oAppSeeting in appSettingVmList)
+                {
+                    <tr>
+                        <td>@oAppSeeting.ReferenceKey</td>
+                        <td>@oAppSeeting.Value</td>
+                        <td>@oAppSeeting.Type</td>
+                        <td>@oAppSeeting.Description</td>
+                        <td>
+                            <a @onclick="() => OnEditClick(oAppSeeting)" class="btn btn-primary">
+                                Edit
+                            </a>
+                            <a @onclick="() => OnDeleteClick(oAppSeeting)" class="btn btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
 
 @code {
+    protected AppSettingVm appSettingVm = new();
+    protected List<AppSettingVm> appSettingVmList = new();
+    protected string[] appSettingTypes = { "String", "Number", "Boolean" };
+    private string warninngMessage = "";
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadAppSetting();
+        }
+        catch (Exception ex)
+        {
+            warninngMessage = ex.Message;
+        }
+    }
+    protected async Task OnSaveSubmitClick()
+    {
+        try
+        {
+            var response = await appSettingService.UpsertAsync(appSettingVm);
+            if (response.Success)
+            {
+                await LoadAppSetting();
+                appSettingVm = new();
+            }
+            else
+                warninngMessage = response.Message;
+        }
+        catch (Exception ex)
+        {
+            warninngMessage = ex.Message;
+        }
+    }
+    protected async Task LoadAppSetting()
+    {
+        try
+        {
+            var response = await appSettingService.GetAppSettingsAsync();
+            if (response.Success)
+                appSettingVmList = response.Output;
+            else
+                warninngMessage = response.Message;
+        }
+        catch (Exception ex)
+        {
+            warninngMessage = ex.Message;
+        }
 
+    }
+    protected async Task OnEditClick(AppSettingVm oAppSettingVm)
+    {
+        try
+        {
+            appSettingVm = oAppSettingVm;
+        }
+        catch (Exception ex)
+        {
+            warninngMessage = ex.Message;
+        }
+    }
+    protected async Task OnDeleteClick(AppSettingVm oAppSettingVm)
+    {
+        try
+        {
+            var response = await appSettingService.DeleteAsync(oAppSettingVm.Id);
+            if (response.Success)
+            {
+                await LoadAppSetting();
+            }
+            else
+                warninngMessage = response.Message;
+        }
+        catch (Exception ex)
+        {
+            warninngMessage = ex.Message;
+        }
+    }
 }

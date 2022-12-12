@@ -1,0 +1,5 @@
+Layer Name :-Application
+Class Name :-AppSettingService
+Method Name :-UpsertAsync
+Date Time :-12/12/2022 1:03:47 PM
+Error Message :-The instance of entity type 'AppSetting' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
