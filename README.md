@@ -25,7 +25,7 @@ This is a project sample for **Blazor Server** with **.NET 7** following **clean
 ## Down the Roadmap 🚀
 - Implement Blazor UI component - Ant Design Blazor
 - Authenctication and Authorization
-- UI Enhancement
+- UI Enhancement - Blazor UI Components
 - Implement Admin LTE Design
 - File Upload to Azure Blog Example
 - Configuration Extension Class
