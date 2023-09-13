@@ -4,6 +4,7 @@
     {
         public TId Id { get; set; }
     }
+    
     public interface IEntity
     {
     }
