@@ -2,6 +2,6 @@
 {
     public abstract class BaseEntity<T>
     {
-        public virtual T Id { get; set; }
+        public virtual T Id { get; set; } = default!;
     }
 }
