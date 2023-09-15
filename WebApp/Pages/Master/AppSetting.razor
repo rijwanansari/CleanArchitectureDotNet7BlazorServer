@@ -49,7 +49,7 @@
 </EditForm>
 @if (appSettingVmList == null)
 {
-    <p><Icon Type="loading" Theme="outline" /> <em>Loading...</em></p>
+    <p><em>Loading...</em></p>
 }
 else
 {
@@ -90,7 +90,7 @@ else
 
 @code {
     protected AppSettingVm appSettingVm = new();
-    protected List<AppSettingVm> appSettingVmList = new();
+    protected List<AppSettingVm>? appSettingVmList;
     protected string[] appSettingTypes = { "String", "Number", "Boolean" };
     private string warninngMessage = "";
     protected override async Task OnInitializedAsync()
@@ -138,7 +138,7 @@ else
         }
 
     }
-    protected async Task OnEditClick(AppSettingVm oAppSettingVm)
+    protected Task OnEditClick(AppSettingVm oAppSettingVm)
     {
         try
         {
@@ -148,6 +148,8 @@ else
         {
             warninngMessage = ex.Message;
         }
+        
+        return Task.CompletedTask;
     }
     protected async Task OnDeleteClick(AppSettingVm oAppSettingVm)
     {

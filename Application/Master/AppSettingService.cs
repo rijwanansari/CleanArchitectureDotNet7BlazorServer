@@ -2,8 +2,6 @@
 using Application.Common.Interface;
 using Application.Common.Model;
 using Application.Master.Dto;
-using AutoMapper;
-using Domain.Master;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

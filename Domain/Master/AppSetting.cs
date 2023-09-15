@@ -7,18 +7,21 @@ namespace Domain.Master
         /// <summary>
         /// Gets or sets the ReferenceKey
         /// </summary>
-        public string ReferenceKey { get; set; } = String.Empty;
+        public string ReferenceKey { get; set; } = string.Empty;
+
         /// <summary>
         /// Gets or sets the Value
         /// </summary>
-        public string Value { get; set; } = String.Empty;
+        public string Value { get; set; } = string.Empty;
+
         /// <summary>
         /// Gets or sets the Description
         /// </summary>
         public string? Description { get; set; }
+        
         /// <summary>
         /// Gets or sets the Type
         /// </summary>
-        public string Type { get; set; } = String.Empty;
+        public string Type { get; set; } = string.Empty;
     }
 }

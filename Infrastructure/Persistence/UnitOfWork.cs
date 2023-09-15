@@ -1,5 +1,4 @@
 ﻿using Application.Common.Interface;
-using Domain.Master;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections;
@@ -21,8 +20,7 @@ namespace Infrastructure.Persistence
         #endregion
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
-            if (_repositories == null)
-                _repositories = new Hashtable();
+            _repositories ??= new Hashtable();
 
             var type = typeof(TEntity).Name;
 
@@ -51,29 +49,23 @@ namespace Infrastructure.Persistence
         }
         public void CommitTransaction()
         {
-            if (dbContextTransaction != null)
-            {
-                dbContextTransaction.Commit();
-            }
+            dbContextTransaction?.Commit();
         }
         public void RollbackTransaction()
         {
-            if (dbContextTransaction != null)
-            {
-                dbContextTransaction.Rollback();
-            }
+            dbContextTransaction?.Rollback();
         }
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
         public void Dispose()
         {
