@@ -107,7 +107,7 @@ namespace Application.Master
             }
             catch (Exception ex)
             {
-                Log(nameof(DeleteAsync), ex.Message);
+                Log(nameof(GetAppSettingByIdAsync), ex.Message);
                 logger?.LogError(ex.ToString());
                 return ResponseModel.FailureResponse(GlobalDeclaration._internalServerError);
             }
