@@ -73,7 +73,8 @@ namespace Application.Master
         #endregion
 
         #region Queries
-        public async Task<ResponseModel> GetAppSettingsAsync()
+
+        public async Task<ResponseModel> GetAsync()
         {
             try
             {
@@ -86,13 +87,13 @@ namespace Application.Master
             }
             catch (Exception ex)
             {
-                Log(nameof(GetAppSettingsAsync), ex.Message);
+                Log(nameof(GetAsync), ex.Message);
                 logger?.LogError(ex.ToString());
                 return ResponseModel.FailureResponse(GlobalDeclaration._internalServerError);
             }
-           
         }
-        public async Task<ResponseModel> GetAppSettingByIdAsync(int Id)
+
+        public async Task<ResponseModel> GetByIdAsync(int Id)
         {
             try
             {
@@ -107,12 +108,11 @@ namespace Application.Master
             }
             catch (Exception ex)
             {
-                Log(nameof(DeleteAsync), ex.Message);
+                Log(nameof(GetByIdAsync), ex.Message);
                 logger?.LogError(ex.ToString());
                 return ResponseModel.FailureResponse(GlobalDeclaration._internalServerError);
             }
         }
-
         #endregion
 
         #endregion
@@ -122,6 +122,7 @@ namespace Application.Master
         {
             errorMessageLog.LogError("Application", "AppSettingService", method, msg);
         }
+
         #endregion
     }
 }

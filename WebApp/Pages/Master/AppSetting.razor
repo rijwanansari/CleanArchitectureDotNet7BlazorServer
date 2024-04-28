@@ -126,7 +126,7 @@ else
     {
         try
         {
-            var response = await appSettingService.GetAppSettingsAsync();
+            var response = await appSettingService.GetAsync();
             if (response.Success)
                 appSettingVmList = response.Output;
             else
